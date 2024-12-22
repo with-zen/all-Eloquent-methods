@@ -1,0 +1,2538 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Example of all Eloquent methods",
+        "version": "1.0"
+    },
+    "paths": {
+        "/users": {
+            "get": {
+                "summary": "Get all users",
+                "description": "Retrieve a list of all users",
+                "operationId": "74a3b47ed7041de83f3b644cf8d6a997",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+        "/api/users/{id}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get User by ID",
+                "description": "Fetches a user by their ID. If the user does not exist, it returns an error message.",
+                "operationId": "getUserById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the user to fetch",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "John Doe"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "example": "john@example.com"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2024-12-01T10:00:00Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2024-12-01T10:00:00Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "User not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Update a User",
+                "description": "Update the name and email of an existing user.",
+                "operationId": "updateUser",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "john@example.com"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User updated successfully"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Delete a User",
+                "description": "Delete a specific user by their ID.",
+                "operationId": "deleteUser",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "User deleted successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            }
+        },
+        "/api/users/{id}/fail": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get User by ID or Fail",
+                "description": "Fetches a user by their ID. If the user does not exist, it throws a ModelNotFoundException and returns a 404 response.",
+                "operationId": "getUserByIdOrFail",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the user to fetch",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "John Doe"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "example": "john@example.com"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2024-12-01T10:00:00Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2024-12-01T10:00:00Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "User not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/first": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get the First User",
+                "description": "Fetches the first user ordered by the `created_at` field.",
+                "operationId": "getFirstUser",
+                "responses": {
+                    "200": {
+                        "description": "First user retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "John Doe"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "example": "john@example.com"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2024-12-01T10:00:00Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2024-12-01T10:00:00Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No user found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "No user found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/first/active": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get the First Active User or Fail",
+                "description": "Fetches the first active user. If no active user is found, it returns an error message.",
+                "operationId": "getFirstUserOrFail",
+                "responses": {
+                    "200": {
+                        "description": "Active user retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Jane Doe"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "example": "jane@example.com"
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "active"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2024-12-01T10:00:00Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2024-12-01T10:00:00Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No active user found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "No active user found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/active": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get Active Users",
+                "description": "Fetches all users with the status 'active'.",
+                "operationId": "getActiveUsers",
+                "responses": {
+                    "200": {
+                        "description": "List of active users",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "name": {
+                                                "type": "string",
+                                                "example": "John Doe"
+                                            },
+                                            "email": {
+                                                "type": "string",
+                                                "example": "john@example.com"
+                                            },
+                                            "status": {
+                                                "type": "string",
+                                                "example": "active"
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "format": "date-time",
+                                                "example": "2024-12-01T10:00:00Z"
+                                            },
+                                            "updated_at": {
+                                                "type": "string",
+                                                "format": "date-time",
+                                                "example": "2024-12-01T10:00:00Z"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/emails": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get All Emails",
+                "description": "Fetches the email addresses of all users.",
+                "operationId": "getAllEmails",
+                "responses": {
+                    "200": {
+                        "description": "List of user emails",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string",
+                                        "example": "john@example.com"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/first-email": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get First User's Email",
+                "description": "Fetches the email address of the first user in the database.",
+                "operationId": "getFirstEmail",
+                "responses": {
+                    "200": {
+                        "description": "First user's email",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "email": {
+                                            "type": "string",
+                                            "example": "john@example.com"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No email found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "No email found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/process-chunks": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Process Users in Chunks",
+                "description": "Processes users in chunks of 100 at a time to optimize memory usage.",
+                "operationId": "processUsersInChunks",
+                "responses": {
+                    "200": {
+                        "description": "Users processed in chunks",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Users processed in chunks"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/process-cursor": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Process Users with Cursor",
+                "description": "Processes users one by one using a cursor for low memory usage.",
+                "operationId": "processUsersWithCursor",
+                "responses": {
+                    "200": {
+                        "description": "Users processed with cursor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Users processed with cursor"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/selected-columns": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get Selected Columns from Users",
+                "description": "Retrieve a list of users with selected columns: id, name, and email.",
+                "operationId": "getSelectedColumns",
+                "responses": {
+                    "200": {
+                        "description": "List of users with selected columns",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "name": {
+                                                "type": "string",
+                                                "example": "John Doe"
+                                            },
+                                            "email": {
+                                                "type": "string",
+                                                "example": "john.doe@example.com"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/distinct-statuses": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get Distinct User Statuses",
+                "description": "Retrieve a list of distinct statuses from the users table.",
+                "operationId": "getDistinctStatuses",
+                "responses": {
+                    "200": {
+                        "description": "List of distinct user statuses",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string",
+                                        "example": "active"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/status/{status}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get Users by Status",
+                "description": "Retrieve a list of users filtered by their status.",
+                "operationId": "getUsersByStatus",
+                "parameters": [
+                    {
+                        "name": "status",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "active"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of users with the specified status",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "name": {
+                                                "type": "string",
+                                                "example": "John Doe"
+                                            },
+                                            "email": {
+                                                "type": "string",
+                                                "example": "john.doe@example.com"
+                                            },
+                                            "status": {
+                                                "type": "string",
+                                                "example": "active"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No users found with the specified status",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "No users found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/active-or-pending": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get Active or Pending Users",
+                "description": "Retrieve a list of users whose status is either active or pending.",
+                "operationId": "getActiveOrPendingUsers",
+                "responses": {
+                    "200": {
+                        "description": "List of active or pending users",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "name": {
+                                                "type": "string",
+                                                "example": "John Doe"
+                                            },
+                                            "email": {
+                                                "type": "string",
+                                                "example": "john.doe@example.com"
+                                            },
+                                            "status": {
+                                                "type": "string",
+                                                "example": "active"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/statuses": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get Users by Multiple Statuses",
+                "description": "Retrieve a list of users filtered by multiple statuses.",
+                "operationId": "getUsersByMultipleStatuses",
+                "responses": {
+                    "200": {
+                        "description": "List of users with specified statuses",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "name": {
+                                                "type": "string",
+                                                "example": "John Doe"
+                                            },
+                                            "email": {
+                                                "type": "string",
+                                                "example": "john.doe@example.com"
+                                            },
+                                            "status": {
+                                                "type": "string",
+                                                "example": "active"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/exclude-statuses": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get Users Excluding Specific Statuses",
+                "description": "Retrieve a list of users excluding certain statuses.",
+                "operationId": "getUsersExcludingStatuses",
+                "responses": {
+                    "200": {
+                        "description": "List of users excluding specific statuses",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "name": {
+                                                "type": "string",
+                                                "example": "John Doe"
+                                            },
+                                            "email": {
+                                                "type": "string",
+                                                "example": "john.doe@example.com"
+                                            },
+                                            "status": {
+                                                "type": "string",
+                                                "example": "active"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/no-email": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get Users Without Email",
+                "description": "Retrieve a list of users who do not have an email address.",
+                "operationId": "getUsersWithoutEmail",
+                "responses": {
+                    "200": {
+                        "description": "List of users without email",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "name": {
+                                                "type": "string",
+                                                "example": "John Doe"
+                                            },
+                                            "email": {
+                                                "type": "string",
+                                                "example": null
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/age-range/{minAge}/{maxAge}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get Users by Age Range",
+                "description": "Retrieve a list of users whose age falls within the specified range.",
+                "operationId": "getUsersByAgeRange",
+                "parameters": [
+                    {
+                        "name": "minAge",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 18
+                        }
+                    },
+                    {
+                        "name": "maxAge",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 40
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of users within the age range",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "name": {
+                                                "type": "string",
+                                                "example": "John Doe"
+                                            },
+                                            "email": {
+                                                "type": "string",
+                                                "example": "john.doe@example.com"
+                                            },
+                                            "age": {
+                                                "type": "integer",
+                                                "example": 30
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/outside-age-range/{minAge}/{maxAge}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get Users Outside Age Range",
+                "description": "Retrieve a list of users whose age is outside the specified range.",
+                "operationId": "getUsersOutsideAgeRange",
+                "parameters": [
+                    {
+                        "name": "minAge",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 18
+                        }
+                    },
+                    {
+                        "name": "maxAge",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 40
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of users outside the age range",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "name": {
+                                                "type": "string",
+                                                "example": "John Doe"
+                                            },
+                                            "email": {
+                                                "type": "string",
+                                                "example": "john.doe@example.com"
+                                            },
+                                            "age": {
+                                                "type": "integer",
+                                                "example": 45
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/join-date/{date}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get Users by Join Date",
+                "description": "Retrieve a list of users who joined on a specific date.",
+                "operationId": "getUsersByJoinDate",
+                "parameters": [
+                    {
+                        "name": "date",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date",
+                            "example": "2024-01-01"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of users who joined on the specified date",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "name": {
+                                                "type": "string",
+                                                "example": "John Doe"
+                                            },
+                                            "email": {
+                                                "type": "string",
+                                                "example": "john.doe@example.com"
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "format": "date",
+                                                "example": "2024-01-01"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/join-month/{month}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get Users by Join Month",
+                "description": "Retrieve a list of users who joined in a specific month.",
+                "operationId": "getUsersByJoinMonth",
+                "parameters": [
+                    {
+                        "name": "month",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of users who joined in the specified month",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "name": {
+                                                "type": "string",
+                                                "example": "John Doe"
+                                            },
+                                            "email": {
+                                                "type": "string",
+                                                "example": "john.doe@example.com"
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "format": "date",
+                                                "example": "2024-01-15"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/join-day/{day}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get Users by Join Day",
+                "description": "Retrieve a list of users who joined on a specific day of the month.",
+                "operationId": "getUsersByJoinDay",
+                "parameters": [
+                    {
+                        "name": "day",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 15
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of users who joined on the specified day",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "name": {
+                                                "type": "string",
+                                                "example": "John Doe"
+                                            },
+                                            "email": {
+                                                "type": "string",
+                                                "example": "john.doe@example.com"
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "format": "date",
+                                                "example": "2024-01-15"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/join-year/{year}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get Users by Join Year",
+                "description": "Retrieve a list of users who joined in a specific year.",
+                "operationId": "getUsersByJoinYear",
+                "parameters": [
+                    {
+                        "name": "year",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 2024
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of users who joined in the specified year",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "name": {
+                                                "type": "string",
+                                                "example": "John Doe"
+                                            },
+                                            "email": {
+                                                "type": "string",
+                                                "example": "john.doe@example.com"
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "format": "date",
+                                                "example": "2024-01-15"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/ordered-by-name": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get Users Ordered by Name",
+                "description": "Retrieve a list of users ordered by their name in ascending order.",
+                "operationId": "getUsersOrderedByName",
+                "responses": {
+                    "200": {
+                        "description": "List of users ordered by name",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "name": {
+                                                "type": "string",
+                                                "example": "John Doe"
+                                            },
+                                            "email": {
+                                                "type": "string",
+                                                "example": "john.doe@example.com"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/latest": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get Latest Users",
+                "description": "Retrieve the most recent users based on the join date.",
+                "operationId": "getLatestUsers",
+                "responses": {
+                    "200": {
+                        "description": "List of the latest users",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "name": {
+                                                "type": "string",
+                                                "example": "John Doe"
+                                            },
+                                            "email": {
+                                                "type": "string",
+                                                "example": "john.doe@example.com"
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "format": "date",
+                                                "example": "2024-01-01"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/oldest": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get Oldest Users",
+                "description": "Retrieve the list of users ordered by their join date from the oldest to the most recent.",
+                "operationId": "getOldestUsers",
+                "responses": {
+                    "200": {
+                        "description": "List of oldest users",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "name": {
+                                                "type": "string",
+                                                "example": "John Doe"
+                                            },
+                                            "email": {
+                                                "type": "string",
+                                                "example": "john.doe@example.com"
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "format": "date",
+                                                "example": "2020-01-01"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/grouped": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get Grouped Users",
+                "description": "Retrieve the count of users grouped by their status.",
+                "operationId": "getGroupedUsers",
+                "responses": {
+                    "200": {
+                        "description": "Count of users grouped by status",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "status": {
+                                                "type": "string",
+                                                "example": "active"
+                                            },
+                                            "total": {
+                                                "type": "integer",
+                                                "example": 10
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/count": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get User Count",
+                "description": "Retrieve the total count of users.",
+                "operationId": "getUserCount",
+                "responses": {
+                    "200": {
+                        "description": "Total number of users",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "count": {
+                                            "type": "integer",
+                                            "example": 100
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/total-age": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get Total Age of Users",
+                "description": "Retrieve the total sum of all users' ages.",
+                "operationId": "getTotalAge",
+                "responses": {
+                    "200": {
+                        "description": "Total sum of users' ages",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "total_age": {
+                                            "type": "integer",
+                                            "example": 2500
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/average-age": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get Average Age of Users",
+                "description": "Retrieve the average age of all users.",
+                "operationId": "getAverageAge",
+                "responses": {
+                    "200": {
+                        "description": "Average age of users",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "average_age": {
+                                            "type": "integer",
+                                            "example": 30
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/minimum-age": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get Minimum Age of Users",
+                "description": "Retrieve the minimum age among all users.",
+                "operationId": "getMinimumAge",
+                "responses": {
+                    "200": {
+                        "description": "Minimum age of users",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "minimum_age": {
+                                            "type": "integer",
+                                            "example": 18
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/maximum-age": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get Maximum Age of Users",
+                "description": "Retrieve the maximum age among all users.",
+                "operationId": "getMaximumAge",
+                "responses": {
+                    "200": {
+                        "description": "Maximum age of users",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "maximum_age": {
+                                            "type": "integer",
+                                            "example": 65
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/with-posts": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get Users With Posts",
+                "description": "Retrieve users who have at least one post.",
+                "operationId": "getUsersWithPosts",
+                "responses": {
+                    "200": {
+                        "description": "List of users with posts",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "name": {
+                                                "type": "string",
+                                                "example": "John Doe"
+                                            },
+                                            "posts": {
+                                                "type": "array",
+                                                "items": {
+                                                    "properties": {
+                                                        "title": {
+                                                            "type": "string",
+                                                            "example": "First Post"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/with-posts-comments": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get Users With Posts and Comments",
+                "description": "Retrieve users with their posts and comments.",
+                "operationId": "getUsersWithPostsAndComments",
+                "responses": {
+                    "200": {
+                        "description": "List of users with posts and comments",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "name": {
+                                                "type": "string",
+                                                "example": "John Doe"
+                                            },
+                                            "posts": {
+                                                "type": "array",
+                                                "items": {
+                                                    "properties": {
+                                                        "title": {
+                                                            "type": "string",
+                                                            "example": "First Post"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "comments": {
+                                                "type": "array",
+                                                "items": {
+                                                    "properties": {
+                                                        "content": {
+                                                            "type": "string",
+                                                            "example": "Great post!"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/with-post-count": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get Users With Post Count",
+                "description": "Retrieve users with the count of posts they have.",
+                "operationId": "getUsersWithPostCount",
+                "responses": {
+                    "200": {
+                        "description": "List of users with post count",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "name": {
+                                                "type": "string",
+                                                "example": "John Doe"
+                                            },
+                                            "posts_count": {
+                                                "type": "integer",
+                                                "example": 5
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/{userId}/posts": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get Posts of a User",
+                "description": "Retrieve all posts made by a specific user.",
+                "operationId": "getUserPosts",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of posts by the user",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "title": {
+                                                "type": "string",
+                                                "example": "First Post"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            }
+        },
+        "/api/users/{userId}/roles": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get Roles of a User",
+                "description": "Retrieve all roles assigned to a specific user.",
+                "operationId": "getUserRoles",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of roles assigned to the user",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "name": {
+                                                "type": "string",
+                                                "example": "Admin"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            }
+        },
+        "/api/users": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Create a User",
+                "description": "Create a new user with provided name, email, and password.",
+                "operationId": "createUser",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "john@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "password123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "User created successfully"
+                    }
+                }
+            }
+        },
+        "/api/users/find-or-create": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Find or Create a User",
+                "description": "Find a user by email, or create a new user if not found.",
+                "operationId": "findOrCreateUser",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "john@example.com"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "password123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User found or created"
+                    }
+                }
+            }
+        },
+        "/api/users/update-or-create": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Update or Create a User",
+                "description": "Update an existing user or create a new user if not found.",
+                "operationId": "updateOrCreateUser",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "john@example.com"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "password123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User updated or created"
+                    }
+                }
+            }
+        },
+        "/api/users/{id}/increment-age": {
+            "patch": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Increment User Age",
+                "description": "Increment the age of a specific user by 1.",
+                "operationId": "incrementUserAge",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User's age incremented successfully"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            }
+        },
+        "/api/users/{id}/decrement-age": {
+            "patch": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Decrement User Age",
+                "description": "Decrement the age of a specific user by 1.",
+                "operationId": "decrementUserAge",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User's age decremented successfully"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            }
+        },
+        "/api/users/delete-multiple": {
+            "delete": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Delete Multiple Users",
+                "description": "Delete multiple users by their IDs.",
+                "operationId": "deleteMultipleUsers",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "ids": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer"
+                                        },
+                                        "example": [
+                                            1,
+                                            2,
+                                            3
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Users deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Users deleted successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/truncate": {
+            "delete": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Truncate All Users",
+                "description": "Delete all users from the database.",
+                "operationId": "truncateUsers",
+                "responses": {
+                    "200": {
+                        "description": "All users deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "All users deleted successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/{id}/refresh": {
+            "patch": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Refresh a User",
+                "description": "Refresh the user's model instance to get the most recent data from the database.",
+                "operationId": "refreshUser",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User refreshed successfully"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            }
+        },
+        "/api/users/{id}/clone": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Clone a User",
+                "description": "Create a clone of an existing user.",
+                "operationId": "cloneUser",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User cloned successfully"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            }
+        },
+        "/api/users/{id}/exists": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Check if User Exists",
+                "description": "Check if a user exists by their ID.",
+                "operationId": "checkUserExists",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User existence status",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "exists": {
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/{id}/update-email": {
+            "put": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Update User Email",
+                "description": "Update the email of a user and return whether the email was changed.",
+                "operationId": "updateUserEmail",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "new-email@example.com"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Email updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "wasChanged": {
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            }
+        },
+        "/api/users/get-by-ids": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get Users by IDs",
+                "description": "Retrieve users by their IDs.",
+                "operationId": "getUsersByIds",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "ids": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer"
+                                        },
+                                        "example": [
+                                            1,
+                                            2,
+                                            3
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Users retrieved successfully"
+                    }
+                }
+            }
+        },
+        "/api/users/email/{email}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get User by Email",
+                "description": "Retrieve a user by their email address.",
+                "operationId": "getUserByEmail",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "email"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User found"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            }
+        },
+        "/api/users/email/{email}/exists": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Check if User Exists by Email",
+                "description": "Check if a user exists by their email address.",
+                "operationId": "checkIfUserExistsByEmail",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "email"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User existence status",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "exists": {
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/email/{email}/does-not-exist": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Check if User Does Not Exist by Email",
+                "description": "Check if a user does not exist by their email address.",
+                "operationId": "checkIfUserDoesNotExistByEmail",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "email"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User non-existence status",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "doesnt_exist": {
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/{id}/soft-delete": {
+            "delete": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Soft Delete a User",
+                "description": "Soft delete a specific user by their ID.",
+                "operationId": "softDeleteUser",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User soft-deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "User soft-deleted successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            }
+        },
+        "/api/users/{id}/restore": {
+            "patch": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Restore a Soft-Deleted User",
+                "description": "Restore a soft-deleted user by their ID.",
+                "operationId": "restoreUser",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User restored successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "User restored successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not found or not trashed"
+                    }
+                }
+            }
+        },
+        "/api/users/{id}/permanently-delete": {
+            "delete": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Permanently Delete a User",
+                "description": "Permanently delete a user by their ID.",
+                "operationId": "permanentlyDeleteUser",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User permanently deleted",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "User permanently deleted"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            }
+        },
+        "/api/users/trashed": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get Trashed Users",
+                "description": "Retrieve users who have been soft-deleted (trashed).",
+                "operationId": "getTrashedUsers",
+                "responses": {
+                    "200": {
+                        "description": "List of trashed users"
+                    }
+                }
+            }
+        },
+        "/api/users/all": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get All Users Including Trashed",
+                "description": "Retrieve all users, including those that have been soft-deleted.",
+                "operationId": "getAllUsersIncludingTrashed",
+                "responses": {
+                    "200": {
+                        "description": "List of all users including trashed"
+                    }
+                }
+            }
+        },
+        "/api/users/paginated": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get Paginated Users",
+                "description": "Retrieve a paginated list of users (10 users per page).",
+                "operationId": "getPaginatedUsers",
+                "responses": {
+                    "200": {
+                        "description": "Paginated list of users",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "current_page": {
+                                            "type": "integer"
+                                        },
+                                        "per_page": {
+                                            "type": "integer"
+                                        },
+                                        "total": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/simple-paginated": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get Simple Paginated Users",
+                "description": "Retrieve a simple paginated list of users (10 users per page).",
+                "operationId": "getSimplePaginatedUsers",
+                "responses": {
+                    "200": {
+                        "description": "Simple paginated list of users",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "current_page": {
+                                            "type": "integer"
+                                        },
+                                        "per_page": {
+                                            "type": "integer"
+                                        },
+                                        "total": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/cursor-paginated": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get Cursor Paginated Users",
+                "description": "Retrieve a cursor-paginated list of users (10 users per page).",
+                "operationId": "getCursorPaginatedUsers",
+                "responses": {
+                    "200": {
+                        "description": "Cursor paginated list of users"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Users",
+            "description": "Users"
+        }
+    ]
+}
