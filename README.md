@@ -31,8 +31,8 @@ This educational project demonstrates the usage of Eloquent methods in Laravel. 
 
 1. **Clone the repository:**
 
-   ```bash
-   git clone https://github.com/yourusername/laravel-eloquent-api.git
+```bash
+   https://github.com/with-zen/all-Eloquent-methods.git
    ```
   ```bash
     composer install
